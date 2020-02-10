@@ -35,7 +35,20 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader:'postcss-loader',
+                        options: {
+                            plugin: function(){
+                                return [
+                                    require('precss'),
+                                    require('autoprefixer')
+                                ];
+                            }
+                        }
+                    },
+                    'sass-loader'
                 ]
             },
             {
@@ -52,6 +65,18 @@ module.exports = {
                 test: /\.hbs$/,
                 use: [
                     'handlebars-loader'
+                ]
+            },
+            {
+                test: /\.(woff2|woff|ttf)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
                 ]
             }
         ]
