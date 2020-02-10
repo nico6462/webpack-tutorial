@@ -1,5 +1,13 @@
+import {library,dom} from '@fortawesome/fontawesome-svg-core';
+import {faSpinner} from '@fortawesome/free-solid-svg-icons';
 import HelloWorldButton from './components/hello-world-button/hello-world-button.js';
 import Heading from './components/heading/heading.js';
+import _ from 'lodash';
+import 'bootstrap';
+import './index.scss';
+
+library.add(faSpinner);
+dom.watch();
 
 const heading = new Heading();
 heading.render('hello world');
@@ -11,3 +19,5 @@ if (process.env.NODE_ENV === 'production') {
 } else if (process.env.NODE_ENV === 'development') {
     console.log('Development mode');
 }
+
+console.log(_.upperFirst('index module'));
